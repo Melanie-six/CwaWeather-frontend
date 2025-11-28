@@ -71,10 +71,11 @@
             position: relative;
         }
 
+        /* === 右上角日期 (更精簡版) === */
         .date-badge {
             position: absolute;
-            top: -12px;
-            right: -10px;
+            top: -15px; /* 稍微往上凸一點 */
+            right: -5px;
             z-index: 30;
             background: linear-gradient(180deg, #FF6B6B 0%, #D32F2F 100%);
             border: 3px solid white;
@@ -82,35 +83,71 @@
             color: white;
             font-family: 'Nunito', sans-serif;
             font-weight: 900;
-            font-size: 1rem;
-            padding: 6px 15px;
+            font-size: 1.1rem; /* 字稍微放大 */
+            padding: 5px 18px; /* 增加寬度讓它看起來像膠囊 */
             box-shadow: inset 0 2px 5px rgba(255,255,255,0.4), 0 5px 10px rgba(0,0,0,0.3);
             text-shadow: 1px 1px 0 #9F0E0E;
             transform: rotate(5deg);
         }
 
+        /* === 雲朵標題 (寬版並排) === */
         .cloud-header {
             position: absolute;
-            top: -25px;
-            left: 45%;
+            top: -30px;
+            left: 40%;
             transform: translateX(-50%);
             background: white;
-            padding: 8px 30px;
             border-radius: 50px;
-            box-shadow: 0 4px 0 #ddd, 0 10px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 0 #ddd, 0 10px 15px rgba(0,0,0,0.15);
             z-index: 20;
             border: 4px solid #E1F5FE;
-            min-width: 180px;
-            text-align: center;
+            
+            /* 修改這裡：讓它變寬、並排 */
+            width: 65%; /* 佔卡片寬度的 85% */
+            max-width: 320px;
+            padding: 10px 15px;
+            display: flex; 
+            flex-direction: row; /* 水平排列 */
+            align-items: center;
+            justify-content: center;
+            gap: 12px; /* 文字與選單的間距 */
         }
         
         .header-text {
             color: var(--header-blue);
             font-family: "Bagel Fat One", system-ui;
             font-weight: 800;
-            font-size: 1.5rem;
-            font-style: normal;
-            text-shadow: 2px 2px 0px white, 4px 4px 0px rgba(0,0,0,0.1);
+            font-size: 1.4rem;
+            line-height: 1;
+            text-shadow: 2px 2px 0px white, 3px 3px 0px rgba(0,0,0,0.1);
+            white-space: nowrap; /* 防止文字換行 */
+        }
+
+        .city-select {
+            appearance: none; 
+            background-color: #FF9BB3;
+            color: white;
+            border: none;
+            /* 稍微調整 padding 讓選單看起來均衡 */
+            padding: 6px 30px 6px 15px;
+            border-radius: 20px;
+            font-family: 'Varela Round', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 10px auto;
+            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1);
+            flex-grow: 1; /* 讓選單佔滿剩餘空間 */
+            text-align-last: center; /* 文字置中 */
+        }
+
+        .city-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 155, 179, 0.4);
         }
 
         .weather-scene {
@@ -121,18 +158,25 @@
         }
 
         .big-temp {
-            position: absolute;
-            top: 10px; 
-            left: 58%; 
-            transform: translateX(-50%);
-            font-family: 'Nunito', sans-serif;
-            font-size: 8.5rem;
-            font-weight: 900;
-            color: var(--temp-color);
-            line-height: 1;
-            z-index: 1; 
-            text-shadow: 4px 4px 0 rgba(0,0,0,0.1), -2px -2px 0 rgba(255,255,255,0.5);
-        }
+    position: absolute;
+    top: 10px; 
+    left: 58%; 
+    transform: translateX(-50%);
+    font-family: "Bagel Fat One", system-ui;
+    font-size: 8.5rem;
+    font-weight: 900;
+    line-height: 1;
+    z-index: 1;
+    
+    /* === 修改重點：漸層文字 === */
+    background: linear-gradient(180deg, #f494b7 10%, #d02161 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* 讓文字變透明，透出背景的漸層 */
+    
+    /* 加上一點點白色描邊光暈，讓它跟背景分開 */
+    filter: drop-shadow(5px 5px 0px #adadad);
+}
 
         .float-icon {
             position: absolute;
@@ -231,6 +275,93 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-3px); }
         }
+/* === 貼心建議區塊 (Candy Button 風格) === */
+.advice-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 25px; /* 增加一點距離 */
+    gap: 12px; /* 按鈕之間的間距 */
+}
+
+.advice-item {
+    flex: 1;
+    /* 膠囊形狀 */
+    border-radius: 50px;
+    padding: 6px; /* 外框與內部內容的距離 */
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* 糖果立體邊框與陰影 */
+    border: 3px solid white;
+    box-shadow: 
+        0 6px 0 rgba(0,0,0,0.15), /* 底部厚度陰影 */
+        inset 0 -4px 0 rgba(0,0,0,0.1); /* 內部立體感 */
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+/* 按下時的效果 (選用) */
+.advice-item:active {
+    transform: translateY(3px); /* 往下壓 */
+    box-shadow: 
+        0 3px 0 rgba(0,0,0,0.15), 
+        inset 0 -4px 0 rgba(0,0,0,0.1);
+}
+
+/* 鮮豔配色 (參考附圖) */
+.advice-green {
+     background: linear-gradient(to bottom, #76FF03, #64DD17); /* 鮮豔萊姆綠 */
+}
+.advice-pink {
+     background: linear-gradient(to bottom, #FF4081, #F50057); /* 鮮豔玫紅 */
+}
+
+/* 左側圖示的圓圈圈底座 */
+.advice-icon-circle {
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.25); /* 半透明白色，透出底色 */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    margin-right: 8px; /* 與文字的距離 */
+    flex-shrink: 0; /* 防止圓圈被壓縮 */
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.advice-icon {
+    width: 30px; /* 圖示大小稍微調整 */
+    height: 30px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); /* 圖示本身的陰影 */
+}
+
+.advice-text-box {
+    flex-grow: 1; /* 佔滿剩餘空間 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 文字水平居中 */
+    padding-right: 5px;
+}
+
+/* 建議文字內容 */
+.advice-content {
+    font-size: 0.95rem; 
+    font-weight: 900;
+    color: white; /* 改成白色文字 */
+    line-height: 1.2;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* 文字增加陰影提高可讀性 */
+    width: 100%;
+    
+    /* 如果文字太長，允許換行，但保持居中 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 最多顯示兩行 */
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
 
         .badge-pill {
             position: absolute;
@@ -334,8 +465,33 @@
 
     <div class="candy-card-wrapper">
         <div id="dateBadge" class="date-badge">Loading...</div>
+        
         <div class="cloud-header">
-            <div class="header-text" id="locationTitle">Level 1</div>
+            <div class="header-text">LEVEL</div>
+            <select id="citySelect" class="city-select">
+                <option value="基隆市">基隆市</option>
+                <option value="臺北市">臺北市</option>
+                <option value="新北市">新北市</option>
+                <option value="桃園市">桃園市</option>
+                <option value="新竹市">新竹市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="臺中市">臺中市</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="臺南市">臺南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="臺東縣">臺東縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="連江縣">連江縣</option>
+            </select>
         </div>
 
         <div class="candy-inner">
@@ -368,6 +524,25 @@
                     <div class="badge-pill" id="windVal">--</div>
                 </div>
             </div>
+            <div class="advice-container">
+    <div class="advice-item advice-green">
+        <div class="advice-icon-circle">
+            <img src="https://img.icons8.com/fluency/96/closed-umbrella.png" class="advice-icon" alt="雨傘">
+        </div>
+        <div class="advice-text-box">
+            <div id="umbrellaAdvice" class="advice-content">計算中...</div>
+        </div>
+    </div>
+
+    <div class="advice-item advice-pink">
+        <div class="advice-icon-circle">
+            <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Coat.png" class="advice-icon" alt="外套">
+        </div>
+        <div class="advice-text-box">
+            <div id="outfitAdvice" class="advice-content">計算中...</div>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 
@@ -378,34 +553,15 @@
     </div>
 
     <script>
-        // ==========================================
-        // 1. 全域設定 (Global Settings)
-        // ==========================================
-        
-        // 設定後端網址 (請確認這是你 Zeabur 的正確網址，不要加最後的斜線)
         const BACKEND_HOST = "https://weatherkeelung.zeabur.app"; 
-        
-        // 設定預設城市 (必須是中文，因為後端 API 是用中文查表的)
         let currentCity = "基隆市"; 
-
-        // 組合出 API 完整網址 (這就是你剛剛找不到的變數)
-        // 使用 encodeURIComponent 是為了確保中文字元在網址傳輸時不會亂碼
         let API_URL = `${BACKEND_HOST}/api/weather/${encodeURIComponent(currentCity)}`;
-console.log("API_URL:", API_URL);
+        const citySelect = document.getElementById('citySelect');
 
-        // ==========================================
-        // 2. 工具函式 (Helper Functions)
-        // ==========================================
-
-        // 根據天氣描述回傳對應的 3D 圖示
         function getWeatherIcon(weather) {
-            // 預設圖示 (多雲)
             let iconUrl = "https://img.icons8.com/fluency/240/partly-cloudy-day.png"; 
-            
-            // 安全檢查：如果 weather 是 undefined，回傳預設圖
             if (!weather) return `<img src="${iconUrl}" alt="Loading">`;
 
-            // 簡單的關鍵字判斷
             if (weather.includes("晴")) iconUrl = "https://img.icons8.com/fluency/240/sun.png";
             else if (weather.includes("雷")) iconUrl = "https://img.icons8.com/fluency/240/storm.png";
             else if (weather.includes("雨")) iconUrl = "https://img.icons8.com/fluency/240/moderate-rain.png";
@@ -414,66 +570,66 @@ console.log("API_URL:", API_URL);
 
             return `<img src="${iconUrl}" alt="${weather}">`;
         }
+        // 雨具建議邏輯
+function getUmbrellaText(pop) {
+    const rain = parseInt(pop);
+    if (isNaN(rain)) return "資料不足";
+    
+    if (rain < 11) return "安心出門";
+    if (rain <= 30) return "帶把傘吧";
+    if (rain <= 50) return "穿雨鞋更安心";
+    return "全副武裝！";
+}
 
-        // 格式化時間 (將 ISO 時間轉為 "月/日 時段")
+// 穿衣建議邏輯
+function getOutfitText(temperature) {
+    const temp = parseInt(temperature);
+    if (isNaN(temp)) return "資料不足";
+
+    if (temp < 10) return "全副武裝！";
+    if (temp <= 20) return "微涼帶個外套";
+    if (temp <= 25) return "氣溫舒適";
+    if (temp <= 30) return "今天可穿短袖"; // 字數稍微縮減以防換行
+    if (temp <= 35) return "熱，注意防曬";
+    return "太熱不宜出門";
+}
+
         function formatTime(isoString) {
             const date = new Date(isoString);
             const month = date.getMonth() + 1;
             const day = date.getDate();
             const hour = date.getHours();
-            
-            // 因為新資料是 12 小時一筆，顯示「早晨/夜晚」比較直觀
             const period = hour < 12 ? "早晨" : "夜晚";
             return `${month}/${day} ${period}`; 
         }
 
-
-        // ==========================================
-        // 3. 畫面渲染 (Render Logic)
-        // ==========================================
-
         function renderWeather(data) {
             const forecasts = data.forecasts;
-            // 檢查是否有資料
             if (!forecasts || forecasts.length === 0) return;
 
             const current = forecasts[0];
-            // 取後續的預報 (未來3天約6筆資料)
             const others = forecasts.slice(1, 7);
 
-            // === A. 更新地點名稱 ===
-            // 顯示 API 回傳的城市名稱
-            document.getElementById('locationTitle').innerText = data.city; 
+            // 這裡不更新 locationTitle 了，因為我們有選單顯示城市
+            // document.getElementById('locationTitle').innerText = data.city; 
 
-            // === B. 更新主畫面數據 (大卡片) ===
             document.getElementById('mainTemp').innerText = `${current.temp}°`;
             document.getElementById('mainIcon').innerHTML = getWeatherIcon(current.weather);
             document.getElementById('weatherTitle').innerText = current.weather;
             
-            // 處理降雨機率 (API 有時回傳 "-" 或 " " 代表 0)
             const rainProb = (current.rain === "-" || current.rain === " ") ? "0" : current.rain;
             document.getElementById('weatherSub').innerText = `降雨 ${rainProb}%`;
 
-            // === C. 更新三顆道具球 (詳細資訊) ===
-            
-            // 1. 降雨球
             document.getElementById('rainVal').innerText = `${rainProb}%`;
-            
-            // 2. 濕度球 (Humidity) - 後端傳來的欄位是 humid
             document.getElementById('humidVal').innerText = `${current.humid}%`;
-            
-            // 3. 風力球 (Wind Scale) - 後端傳來的欄位是 windScale
-            // 顯示格式例如: "Lv.3"
             document.getElementById('windVal').innerText = `Lv.${current.windScale}`; 
 
-            // === D. 更新下方預報條 (Future Forecast) ===
             const strip = document.getElementById('hourlyStrip');
             strip.innerHTML = ''; 
 
             others.forEach(f => {
                 const timeStr = formatTime(f.startTime);
                 
-                // 這裡使用 Template String 產生 HTML
                 strip.innerHTML += `
                     <div class="hour-item">
                         <div class="hour-time" style="font-size: 0.6rem;">${timeStr}</div>
@@ -482,30 +638,28 @@ console.log("API_URL:", API_URL);
                     </div>
                 `;
             });
+// === 新增：更新貼心建議 ===
+    // 1. 雨具建議
+    const rainText = getUmbrellaText(current.rain);
+    document.getElementById('umbrellaAdvice').innerText = rainText;
 
-            // === E. 更新右上角日期 ===
+    // 2. 穿衣建議
+    const outfitText = getOutfitText(current.temp);
+    document.getElementById('outfitAdvice').innerText = outfitText;
+            // === 日期顯示修正：移除年份，只顯示 MM/DD ===
             const now = new Date();
-            const yyyy = now.getFullYear();
             const mm = String(now.getMonth() + 1).padStart(2, '0');
             const dd = String(now.getDate()).padStart(2, '0');
             const dateBadge = document.getElementById('dateBadge');
-            if(dateBadge) dateBadge.innerText = `${yyyy}/${mm}/${dd}`;
+            if(dateBadge) dateBadge.innerText = `${mm}/${dd}`;
         }
-
-
-        // ==========================================
-        // 4. 資料抓取 (Fetch Logic)
-        // ==========================================
 
         async function fetchWeather() {
             try {
-                // 模擬 Loading 動畫 (使用者體驗優化)
-                await new Promise(r => setTimeout(r, 800)); 
+                document.getElementById('loading').style.display = 'flex';
                 
-                // 更新 API_URL (確保變數是最新的)
                 API_URL = `${BACKEND_HOST}/api/weather/${encodeURIComponent(currentCity)}`;
-                
-                console.log("正在呼叫 API:", API_URL); // 除錯用，可在 Console 看到網址
+                console.log("正在呼叫 API:", API_URL); 
 
                 const res = await fetch(API_URL);
                 const json = await res.json();
@@ -514,19 +668,26 @@ console.log("API_URL:", API_URL);
                     renderWeather(json.data);
                     document.getElementById('loading').style.display = 'none';
                 } else {
-                    // 顯示後端回傳的具體錯誤訊息
                     const msg = json.message || json.error || "未知錯誤";
-                    console.error("API Error Detail:", json);
                     alert("讀取失敗: " + msg);
+                    document.getElementById('loading').style.display = 'none';
                 }
             } catch (e) {
                 console.error(e);
                 alert("連線失敗，請檢查網路或後端狀態");
+                document.getElementById('loading').style.display = 'none';
             }
         }
 
-        // 當網頁載入完成後，執行 fetchWeather
-        document.addEventListener("DOMContentLoaded", fetchWeather);
+        citySelect.addEventListener('change', (e) => {
+            currentCity = e.target.value;
+            fetchWeather();
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            citySelect.value = currentCity;
+            fetchWeather();
+        });
     </script>
     
     <script>
