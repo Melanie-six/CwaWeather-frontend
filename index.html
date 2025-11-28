@@ -12,38 +12,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 糖果條紋色 */
             --stripe-1: #FFCF40; 
             --stripe-2: #FFBF00;
-            
-            /* 核心粉紅卡片 */
             --popup-bg: linear-gradient(180deg, #FFF0F5 0%, #FFDEE9 100%);
-            
-            /* 文字顏色 */
             --header-blue: #0099CC;
-            --temp-color: #ffffff; /* 溫度純白 */
-            --desc-color: rgba(93, 64, 55, 0.6); /* 說明文字(深色半透明) */
-            
-            /* 道具球顏色 */
+            --temp-color: #ffffff;
+            --desc-color: rgba(93, 64, 55, 0.6);
             --circle-blue-1: #f185f5;
             --circle-blue-2: #FF9BB3;
-            
-            /* 底部預報條 (原本的變數保留，但下面會用 RGBA 覆蓋) */
-            --streak-bg: #001F4D;
+            --streak-bg: rgba(0, 31, 77, 0.6); 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
             font-family: 'Varela Round', sans-serif;
-            
-            /* === 背景設定 === */
-            background-image: url('body-bg.png'); /* 請確認圖片路徑正確 */
+            background-image: url('body-bg.png'); 
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -53,7 +41,6 @@
             padding: 20px;
         }
 
-        /* === 1. 黃色條紋外框 (主卡片) === */
         .candy-card-wrapper {
             width: 100%;
             max-width: 380px;
@@ -69,14 +56,12 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.25);
             position: relative;
             z-index: 10;
-            margin-bottom: 25px; /* 與下方預報條的距離 */
+            margin-bottom: 25px;
         }
 
-        /* === 2. 粉紅內層 === */
         .candy-inner {
             background: var(--popup-bg);
             border-radius: 25px;
-            /* 增加下方 padding 給道具球空間 */
             padding: 50px 20px 25px 20px; 
             display: flex;
             flex-direction: column;
@@ -85,40 +70,25 @@
             border: 3px solid rgba(255,255,255,0.7);
             position: relative;
         }
-/* === 右上角日期 (Candy Crush 關閉按鈕風格) === */
-.date-badge {
-    position: absolute;
-    /* 定位在右上角，並稍微突出去一點 */
-    top: -12px;
-    right: -10px;
-    z-index: 30; /* 確保在最上層 */
 
-    /* 紅色糖果質感 */
-    background: linear-gradient(180deg, #FF6B6B 0%, #D32F2F 100%);
-    
-    /* 白色粗邊框 */
-    border: 3px solid white;
-    border-radius: 50px; /* 圓潤的膠囊形狀 */
-    
-    /* 文字設定 */
-    color: white;
-    font-family: 'Nunito', sans-serif; /* 用圓一點的英文字體 */
-    font-weight: 900;
-    font-size: 1rem;
-    padding: 6px 15px;
-    
-    /* 立體陰影 */
-    box-shadow: 
-        inset 0 2px 5px rgba(255,255,255,0.4), /* 頂部高光 */
-        0 5px 10px rgba(0,0,0,0.3); /* 外部陰影 */
-        
-    /* 文字陰影 (增加刻印感) */
-    text-shadow: 1px 1px 0 #9F0E0E;
-    
-    /* 微微旋轉，看起來像隨手貼上去的貼紙 */
-    transform: rotate(5deg);
-}
-        /* === 3. 雲朵標題 (維持原樣) === */
+        .date-badge {
+            position: absolute;
+            top: -12px;
+            right: -10px;
+            z-index: 30;
+            background: linear-gradient(180deg, #FF6B6B 0%, #D32F2F 100%);
+            border: 3px solid white;
+            border-radius: 50px;
+            color: white;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 6px 15px;
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.4), 0 5px 10px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 0 #9F0E0E;
+            transform: rotate(5deg);
+        }
+
         .cloud-header {
             position: absolute;
             top: -25px;
@@ -135,91 +105,60 @@
         }
         
         .header-text {
-    color: var(--header-blue);
-    
-    /* 修改這裡：改成 Bagel Fat One */
-    font-family: "Bagel Fat One", system-ui;
-    font-weight: 800; /* 這個字體本身就很粗，設 400 即可 */
-    font-size: 1.5rem; /* 如果覺得字太胖變擠，可以稍微縮小一點 */
-    font-style: normal; /* 這個字體不建議用斜體，正的比較可愛 */
-    
-    /* 為了讓胖胖字體更立體，可以加強描邊效果 */
-    text-shadow: 
-        2px 2px 0px white, 
-        4px 4px 0px rgba(0,0,0,0.1);
-}
+            color: var(--header-blue);
+            font-family: "Bagel Fat One", system-ui;
+            font-weight: 800;
+            font-size: 1.5rem;
+            font-style: normal;
+            text-shadow: 2px 2px 0px white, 4px 4px 0px rgba(0,0,0,0.1);
+        }
 
-        /* === 4. 重點：新版天氣構圖區 (Weather Scene) === */
-        /* === 4. 重點：新版天氣構圖區 (Weather Scene) === */
-.weather-scene {
-    position: relative;
-    width: 100%;
-    /* 1. 高度拉高：為了容納上下兩層結構 */
-    height: 220px; 
-    margin-bottom: 5px;
-    /* 移除 flex center，改用 absolute 自由定位 */
-}
+        .weather-scene {
+            position: relative;
+            width: 100%;
+            height: 220px; 
+            margin-bottom: 5px;
+        }
 
-/* 巨大的溫度 (改為：上方置中偏右) */
-.big-temp {
-    position: absolute;
-    /* 2. 定位在上方 */
-    top: 10px; 
-    /* 稍微往右偏一點 (left: 60%)，這樣左下角才有空間讓圖示蓋上去 */
-    left: 58%; 
-    transform: translateX(-50%);
-    
-    font-family: 'Nunito', sans-serif;
-    font-size: 8.5rem; /* 字體再稍微加大 */
-    font-weight: 900;
-    color: var(--temp-color);
-    line-height: 1;
-    
-    /* 3. 關鍵層級：z-index: 1 (在底層/後面) */
-    z-index: 1; 
-    
-    text-shadow: 
-        4px 4px 0 rgba(0,0,0,0.1),
-        -2px -2px 0 rgba(255,255,255,0.5);
-}
+        .big-temp {
+            position: absolute;
+            top: 10px; 
+            left: 58%; 
+            transform: translateX(-50%);
+            font-family: 'Nunito', sans-serif;
+            font-size: 8.5rem;
+            font-weight: 900;
+            color: var(--temp-color);
+            line-height: 1;
+            z-index: 1; 
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.1), -2px -2px 0 rgba(255,255,255,0.5);
+        }
 
-/* 天氣圖示 (改為：左下角浮動) */
-/* 天氣圖示 (左下角浮動 - 圖片版) */
-.float-icon {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    
-    /* 修改這裡：設定圖片具體大小，取代原本的 font-size */
-    width: 130px; 
-    height: 130px;
-    
-    z-index: 5; 
-    
-    /* 確保圖片本身有浮動動畫 */
-    animation: float 3s ease-in-out infinite;
-}
+        .float-icon {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 130px; 
+            height: 130px;
+            z-index: 5; 
+            animation: float 3s ease-in-out infinite;
+        }
 
-/* 確保圖片在容器內滿版顯示 */
-.float-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    /* 圖片陰影直接加在 img 上效果比較好 */
-    filter: drop-shadow(5px 10px 10px rgba(0,0,0,0.2));
-}
+        .float-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(5px 10px 10px rgba(0,0,0,0.2));
+        }
 
-/* 天氣說明 (改為：右下角並排) */
-.weather-desc {
-    position: absolute;
-    /* 6. 定位在右下角 */
-    bottom: 30px; 
-    right: 30px;
-    
-    text-align: right;
-    line-height: 1.2;
-    z-index: 2;
-}
+        .weather-desc {
+            position: absolute;
+            bottom: 30px; 
+            right: 30px;
+            text-align: right;
+            line-height: 1.2;
+            z-index: 2;
+        }
 
         .desc-main {
             font-size: 1.4rem;
@@ -234,7 +173,6 @@
             color: var(--desc-color);
         }
 
-        /* === 5. 道具圈圈 === */
         .powerups-container {
             display: flex;
             justify-content: space-around;
@@ -259,14 +197,12 @@
         }
         .powerup-circle:active { transform: scale(0.95); }
 
-        /* 1. 頂部糖果標籤 */
         .powerup-label {
             position: absolute; 
             top: -14px; 
             left: 50%;
             transform: translateX(-50%); 
             z-index: 5; 
-
             background: linear-gradient(to bottom, #FF9BB3, #bc4277); 
             color: white;
             font-weight: 900;
@@ -281,7 +217,6 @@
             text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
         }
 
-        /* 2. 圖片位置微調 */
         .powerup-img {
             width: 60%;  
             height: 60%;
@@ -313,15 +248,11 @@
             box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
-        /* === 6. 底部長條 (修改為半透明) === */
         .win-streak-bar {
             width: 100%;
             max-width: 380px; 
-            /* 修改這裡：改成 RGBA 半透明深藍色 */
-            background: rgba(0, 31, 77, 0.6); 
-            /* 加上毛玻璃效果，增加質感 */
+            background: var(--streak-bg); 
             backdrop-filter: blur(5px);
-            
             border-radius: 20px;
             padding: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
@@ -329,7 +260,6 @@
             position: relative;
         }
 
-        /* 標題旗幟 */
         .streak-title {
             position: absolute;
             top: -14px;
@@ -368,32 +298,27 @@
         }
         
         .hour-time { font-size: 0.7rem; opacity: 0.8; margin-bottom: 2px; font-weight: 700;}
-        /* === 修正下方預報卡片圖示過大的問題 === */
 
-.hour-icon {
-    /* 讓圖片容器置中 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px 0;
-}
+        .hour-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 0;
+        }
 
-/* 關鍵：強制限制下方卡片裡的圖片大小 */
-.hour-icon img {
-    width: 40px;  /* 設定寬度，原本是 240px 太大了 */
-    height: 40px; /* 設定高度 */
-    object-fit: contain; /* 保持比例 */
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2)); /* 加一點小陰影 */
-}
+        .hour-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+        }
         .hour-temp { font-size: 1rem; font-weight: 900; }
 
-        /* 動畫 */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
 
-        /* Loading */
         .loading-mask {
             position: fixed; inset: 0; background: #001F4D; z-index: 999;
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: white;
@@ -440,7 +365,7 @@
                 <div class="powerup-circle">
                     <img src="https://img.icons8.com/fluency/96/wind.png" class="powerup-img" alt="風速">
                     <div class="powerup-label">Wind</div>
-                    <div class="badge-pill" id="windVal">2</div>
+                    <div class="badge-pill" id="windVal">--</div>
                 </div>
             </div>
         </div>
@@ -449,89 +374,139 @@
     <div class="win-streak-bar">
         <div class="streak-title">Future Forecast</div>
         <div class="hourly-scroll" id="hourlyStrip">
-            </div>
+        </div>
     </div>
 
     <script>
-        const API_URL = "https://weatherkeelung.zeabur.app/api/weather/kaohsiung";
+        // ==========================================
+        // 1. 全域設定 (Global Settings)
+        // ==========================================
+        
+        // 設定後端網址 (請確認這是你 Zeabur 的正確網址，不要加最後的斜線)
+        const BACKEND_HOST = "https://weatherkeelung.zeabur.app"; 
+        
+        // 設定預設城市 (必須是中文，因為後端 API 是用中文查表的)
+        let currentCity = "基隆市"; 
 
+        // 組合出 API 完整網址 (這就是你剛剛找不到的變數)
+        // 使用 encodeURIComponent 是為了確保中文字元在網址傳輸時不會亂碼
+        let API_URL = `${BACKEND_HOST}/api/weather/${encodeURIComponent(currentCity)}`;
+console.log("API_URL:", API_URL);
+
+        // ==========================================
+        // 2. 工具函式 (Helper Functions)
+        // ==========================================
+
+        // 根據天氣描述回傳對應的 3D 圖示
         function getWeatherIcon(weather) {
-    let iconUrl = "https://img.icons8.com/fluency/240/partly-cloudy-day.png"; // 預設圖 (多雲)
+            // 預設圖示 (多雲)
+            let iconUrl = "https://img.icons8.com/fluency/240/partly-cloudy-day.png"; 
+            
+            // 安全檢查：如果 weather 是 undefined，回傳預設圖
+            if (!weather) return `<img src="${iconUrl}" alt="Loading">`;
 
-    // 簡單的關鍵字判斷，你可以根據需要擴充
-    if (weather.includes("晴")) {
-        iconUrl = "https://img.icons8.com/fluency/240/sun.png";
-    } else if (weather.includes("雷")) {
-        iconUrl = "https://img.icons8.com/fluency/240/storm.png";
-    } else if (weather.includes("雨")) {
-        iconUrl = "https://img.icons8.com/fluency/240/moderate-rain.png";
-    } else if (weather.includes("陰") || weather.includes("雲")) {
-        iconUrl = "https://img.icons8.com/fluency/240/clouds.png";
-    } else if (weather.includes("多雲")) {
-        iconUrl = "https://img.icons8.com/fluency/240/partly-cloudy-day.png";
-    }
+            // 簡單的關鍵字判斷
+            if (weather.includes("晴")) iconUrl = "https://img.icons8.com/fluency/240/sun.png";
+            else if (weather.includes("雷")) iconUrl = "https://img.icons8.com/fluency/240/storm.png";
+            else if (weather.includes("雨")) iconUrl = "https://img.icons8.com/fluency/240/moderate-rain.png";
+            else if (weather.includes("陰") || weather.includes("雲")) iconUrl = "https://img.icons8.com/fluency/240/clouds.png";
+            else if (weather.includes("多雲")) iconUrl = "https://img.icons8.com/fluency/240/partly-cloudy-day.png";
 
-    // 回傳圖片標籤
-    return `<img src="${iconUrl}" alt="${weather}">`;
-}
+            return `<img src="${iconUrl}" alt="${weather}">`;
+        }
 
+        // 格式化時間 (將 ISO 時間轉為 "月/日 時段")
         function formatTime(isoString) {
             const date = new Date(isoString);
-            return `${date.getHours()}:00`; 
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const hour = date.getHours();
+            
+            // 因為新資料是 12 小時一筆，顯示「早晨/夜晚」比較直觀
+            const period = hour < 12 ? "早晨" : "夜晚";
+            return `${month}/${day} ${period}`; 
         }
+
+
+        // ==========================================
+        // 3. 畫面渲染 (Render Logic)
+        // ==========================================
 
         function renderWeather(data) {
             const forecasts = data.forecasts;
+            // 檢查是否有資料
+            if (!forecasts || forecasts.length === 0) return;
+
             const current = forecasts[0];
-            const others = forecasts.slice(1);
+            // 取後續的預報 (未來3天約6筆資料)
+            const others = forecasts.slice(1, 7);
 
-            // === 修改這裡 ===
-            // 1. 地點改成 "基隆 City"
-            document.getElementById('locationTitle').innerText = "KEELUNG"; 
+            // === A. 更新地點名稱 ===
+            // 顯示 API 回傳的城市名稱
+            document.getElementById('locationTitle').innerText = data.city; 
 
-            // 2. 主畫面數據
-            const avgTemp = Math.round((parseInt(current.maxTemp) + parseInt(current.minTemp)) / 2);
-            
-            document.getElementById('mainTemp').innerText = `${avgTemp}°`;
+            // === B. 更新主畫面數據 (大卡片) ===
+            document.getElementById('mainTemp').innerText = `${current.temp}°`;
             document.getElementById('mainIcon').innerHTML = getWeatherIcon(current.weather);
             document.getElementById('weatherTitle').innerText = current.weather;
-            document.getElementById('weatherSub').innerText = `降雨 ${current.rain}`;
+            
+            // 處理降雨機率 (API 有時回傳 "-" 或 " " 代表 0)
+            const rainProb = (current.rain === "-" || current.rain === " ") ? "0" : current.rain;
+            document.getElementById('weatherSub').innerText = `降雨 ${rainProb}%`;
 
-            // 3. 道具數據
-            document.getElementById('rainVal').innerText = current.rain; 
-            document.getElementById('humidVal').innerText = "60"; 
-            document.getElementById('windVal').innerText = "Lv2"; 
+            // === C. 更新三顆道具球 (詳細資訊) ===
+            
+            // 1. 降雨球
+            document.getElementById('rainVal').innerText = `${rainProb}%`;
+            
+            // 2. 濕度球 (Humidity) - 後端傳來的欄位是 humid
+            document.getElementById('humidVal').innerText = `${current.humid}%`;
+            
+            // 3. 風力球 (Wind Scale) - 後端傳來的欄位是 windScale
+            // 顯示格式例如: "Lv.3"
+            document.getElementById('windVal').innerText = `Lv.${current.windScale}`; 
 
-            // 4. 下方預報條
+            // === D. 更新下方預報條 (Future Forecast) ===
             const strip = document.getElementById('hourlyStrip');
             strip.innerHTML = ''; 
 
             others.forEach(f => {
                 const timeStr = formatTime(f.startTime);
-                const t = Math.round((parseInt(f.maxTemp) + parseInt(f.minTemp)) / 2);
                 
+                // 這裡使用 Template String 產生 HTML
                 strip.innerHTML += `
                     <div class="hour-item">
-                        <div class="hour-time">${timeStr}</div>
+                        <div class="hour-time" style="font-size: 0.6rem;">${timeStr}</div>
                         <div class="hour-icon">${getWeatherIcon(f.weather)}</div>
-                        <div class="hour-temp">${t}°</div>
+                        <div class="hour-temp">${f.temp}°</div>
                     </div>
                 `;
             });
-            // === 新增：設定日期 ===
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    // 月份跟日期如果不滿 10，前面補 0 (例如 5 -> 05)
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const dd = String(now.getDate()).padStart(2, '0');
-    
-    document.getElementById('dateBadge').innerText = `${yyyy}/${mm}/${dd}`;
 
+            // === E. 更新右上角日期 ===
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const dateBadge = document.getElementById('dateBadge');
+            if(dateBadge) dateBadge.innerText = `${yyyy}/${mm}/${dd}`;
         }
+
+
+        // ==========================================
+        // 4. 資料抓取 (Fetch Logic)
+        // ==========================================
 
         async function fetchWeather() {
             try {
-                await new Promise(r => setTimeout(r, 1000)); 
+                // 模擬 Loading 動畫 (使用者體驗優化)
+                await new Promise(r => setTimeout(r, 800)); 
+                
+                // 更新 API_URL (確保變數是最新的)
+                API_URL = `${BACKEND_HOST}/api/weather/${encodeURIComponent(currentCity)}`;
+                
+                console.log("正在呼叫 API:", API_URL); // 除錯用，可在 Console 看到網址
+
                 const res = await fetch(API_URL);
                 const json = await res.json();
 
@@ -539,16 +514,21 @@
                     renderWeather(json.data);
                     document.getElementById('loading').style.display = 'none';
                 } else {
-                    alert("API Error");
+                    // 顯示後端回傳的具體錯誤訊息
+                    const msg = json.message || json.error || "未知錯誤";
+                    console.error("API Error Detail:", json);
+                    alert("讀取失敗: " + msg);
                 }
             } catch (e) {
                 console.error(e);
-                alert("讀取失敗");
+                alert("連線失敗，請檢查網路或後端狀態");
             }
         }
 
+        // 當網頁載入完成後，執行 fetchWeather
         document.addEventListener("DOMContentLoaded", fetchWeather);
     </script>
+    
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
